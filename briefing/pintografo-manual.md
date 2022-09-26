@@ -157,4 +157,4 @@ Conecte duas máquinas entre si utilizando o protocolo I2C ou Serial de forma a 
 
 # Repositório
 
-No repositório deste projeto, localizado em 
+No repositório deste projeto, localizado em >https://github.com/sixhat/Pintografo> pode encontrar ficheiros template para as diversas fases do projecto. Estes ficheiros serão bons pontos de partida para desenvolver os seus próprios modelos. 
