@@ -1,6 +1,6 @@
 # Pintógrafo
 
-> ATENÇÃO : Work in progress, este repositório ainda está em fase inicial e bastante incompleto, pelo que não contém toda a informação para completar o projeto.
+> **ATENÇÃO** — *Work in progress*, este repositório ainda está em fase inicial e bastante incompleto, pelo que não contém toda a informação para completar o projeto.
 
 Este repositório contém instruções detalhadas para a construção de uma máquina de desenho digital, baseada nos princípios do pantógrafo de ampliação.
 
