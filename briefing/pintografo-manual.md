@@ -29,7 +29,7 @@ header-includes: |
   \usepackage{float}
   \floatplacement{figure}{H}
 ---
-DRAFT: \today
+Repositório online: <https://github.com/sixhat/Pintografo/> (\today)
 \tableofcontents
 
 # Máquina de Desenho - Pintógrafo[^1]
@@ -60,9 +60,9 @@ O chassi deste projecto dará suporte aos componentes electrónicos, aos braços
 
 O chassi está pensado para o tamanho A4 (tamanho máximo de corte a Laser no Lab Aberto)
 
-A geração da caixa deve ter as dimensões A4 ($297\times210mm$) e uma altura de $60-70mm$ para poder albergar os componentes electrónicos dentro da mesma. 
+A geração da caixa deve ter as dimensões $297\times210\times60mm$ para poder albergar os componentes electrónicos dentro da mesma. 
 
-Para criar os templates da caixa vamos utilizar o website MakerCase — <https://www.makercase.com/> — onde definimos as partes necessárias da caixa para posterior corte na máquina a Laser.  
+Para criar os templates da caixa vamos utilizar o website MakerCase — <https://www.makercase.com/> — onde definimos as partes necessárias da caixa para posterior corte na máquina a Laser. Ao exportar os SVGs da caixa tens que definir o valor de Kerf para 0.15mm.\nota{\textbf{Kerf} é a largura do material que é removido pelo corte a laser. Este valor é dependente da máquina de corte utilizada e vai ter implicações na perfeição das junções finais da caixa.}
 
 ![Imagem SVG produzida pelo makercase.com](assets/caixa_chassis.svg){width=10cm}
 
