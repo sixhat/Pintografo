@@ -28,15 +28,21 @@ header-includes: |
   \urlstyle{same}
   \usepackage{float}
   \floatplacement{figure}{H}
+  \usepackage[scale=0.95]{sourcecodepro}
+  \usepackage{microtype}
+  \usepackage[]{titlesec}
+  \titleformat{\section}[frame]{\normalfont}{\filright \footnotesize \enspace SECTION \thesection\enspace}{8pt}{\Large\bfseries\filcenter}
+  \titleformat{\subsection}{\titlerule\vspace{.8ex}\normalfont\itshape}{\thesubsection.}{.5em}{\bfseries}
 ---
 Repositório online: <https://github.com/sixhat/Pintografo/> (\today)
 \tableofcontents
 
+\pagebreak
 # Máquina de Desenho - Pintógrafo[^1]
 
 [^1]: O nome Pintógrafo não é um nome técnico, mas antes um nome inventado pela filha de [Fran McConville](https://www.fxmtech.com/harmonog.html), um construtor destas máquinas. No entanto o nome começou a ser utilizado de forma genérica para designar estas máquinas de desenho. Neste documento vamos utilizar o nome pintógrafo.
 
-Instruções de construção de uma máquina de desenho baseada nos princípios de um pantógrafo.
+Este documento apresenta algumas instruções de construção de uma máquina de desenho baseada nos princípios de um pantógrafo. A máquina será desenvolvida pelos alunos da disciplina de Computação Física duranto o primeiro semestre do ano 2022-2023.
 
 ![Máquina de desenhos com braços de pantógrafo.](assets/20220918162202.png){width=10cm}
 
@@ -52,10 +58,12 @@ Os Harmonógrafos são semelhantes mas utilizam pêndulos para criar o movimento
 
 No website <https://michaldudak.github.io/pintograph/demo/> podes encontrar diversas simulações de pintógrafos com diferentes características de montagem e comparar os resultados de cada um.
 
-## Chassi
-O chassi deste projecto dará suporte aos componentes electrónicos, aos braços móveis e também ao papel utilizado para os desenhos. Na sua essência é uma caixa que será recortada a Laser em madeira de $3mm$ de espessura. 
+\pagebreak
+# Chassi
 
-### Construção da Caixa
+O chassi deste projecto dará suporte aos componentes electrónicos, aos braços móveis e também ao papel utilizado para os desenhos. Na sua essência é uma caixa que será recortada a Laser em madeira de $3mm$ de espessura.
+
+## Construção da Caixa
 
 ![Caixa gerada no MakerCase.com](assets/20220925071954.png){width=10cm}
 
@@ -69,16 +77,17 @@ Para criar os templates da caixa vamos utilizar o website MakerCase — <https:/
 
 Faz download do ficheiro resultante e abre-o no InkScape ou Adobe Illustrator. Deverás ter algo semelhante à figura.
 
-### Recortes
+## Recortes
 
 A caixa tal como foi descarregada está totalmente fechada. Vai ser necessário fazer recortes extra para colocar os componentes móveis e eléctricos. Nomeadamente haverá recortes para:\nota{Será facultado um template em SVG para os recortes, para a máquina básica, mas deves desenhar o teu para a tua versão da máquina. Deves medir rigorosamente todas as dimensões e realizar o desenho em InkScape ou Illustrator.}
 
 - Tomada USB do Arduino num tampo lateral. Poderá ser feito a Laser ou com um berbequim com uma broca larga.
 - Recortes para encaixe do motor, potenciometros e outros componentes no tampo superior da máquina. Estes recortes serão feitos num desenho SVG para que a tampa possa ser de seguida recortada a Laser.
 
-## Partes móveis
+\pagebreak
+# Partes móveis
 
-As partes móveis correspondem aos braços de pantógrafos que conectam os discos de rotação e a caneta de desenho aos motores. 
+As partes móveis correspondem aos braços de pantógrafos que conectam os discos de rotação e a caneta de desenho aos motores.
 
 ![Princípio de funcionamento de um pantógrafo](assets/pantografo-01.png){width=10cm}
 
@@ -87,8 +96,7 @@ As partes móveis correspondem aos braços de pantógrafos que conectam os disco
 Estas peças serão realizadas através de fabricação aditiva — impressão 3D em PLA.
 
 
-
-### Braços do pintógrafo.
+## Braços do pintógrafo.
 
 ![Braços para o Pintógrafo](assets/pinto-bracos.png){width=8cm}
 
@@ -96,7 +104,7 @@ Os Braços do pintógrafo devem ser modelados com orifícios regularmente espaç
 
 A altura dos braços pode ser limitada a $4mm$ e o comprimento de cada braço não deve exceder os $200mm$. Os orifícios devem ser dimensionados de acordo com os veios e parafusos a utilizar. Tipicamente $3mm$ são apropriados.
 
-### Discos de rotação.
+## Discos de rotação.
 
 ![Disco de rotação](assets/pinto-discos-rotacao.png){width=7cm}
 
@@ -104,16 +112,17 @@ Os discos de rotação servem para colocar o ponto de fixação dos braços. Col
 
 Os discos de rotação podem ser simples ou podem ser compostos por mais do que um disco, normalmente interligados por um sistema de rodas dentadas como no exemplo acima.
 
-### Suporte de caneta.
+## Suporte de caneta.
 
 ![Suporte de canetas de $8mm$ de diâmetro](assets/pinto-suporte-caneta.png){height=4cm}
 
 \nota{Um lápis típico normalmente tem $8mm$ de diâmetro. No entanto uma caneta BIC é ligeiramente maior. Pensa se podes fazer uma versão de suporte universal, por exemplo recorrendo à utilização de um elástico.}
 O suporte de caneta deverá ser pensado para dar estabilidade à caneta. Um tubo com o diâmetro aproximado de $8-10mm$ pode ser apropriado desde que este possua um orifício onde se possa colocar um parafuso para fixar a caneta no local. 
 
-## Electrónica
+\pagebreak
+# Electrónica
 
-A tua máquina de desenho vai funcionar com a utilização de dois steppers\nota{Os steppers, ou motores de passo, são utilizados em muitos dispositivos que requerem controlo fino da rotação do veio, como por exemplo nas impressoras\,3D}muito simples. Neste projeto vamos utilizar o steppper 28BYJ-48 conjuntamente com o driver ULN2003. 
+A tua máquina de desenho vai funcionar com a utilização de dois steppers\nota{Os steppers, ou motores de passo, são utilizados em muitos dispositivos que requerem controlo fino da rotação do veio, como por exemplo nas impressoras\,3D}muito simples. Neste projeto vamos utilizar o steppper 28BYJ-48 conjuntamente com o driver ULN2003.
 
 ![28BYJ-48 stepper](assets/28BYJ-48_Stepper_Motor.png){height=5cm}
 
@@ -129,13 +138,13 @@ Este driver permite controlar facilmente o stepper. Deve ser alimentado por 5V, 
 
 O Arduino vai conectar 4 pinos a este driver nos pontos *in1*, *in2*, *in3* e *in4*. Como vamos utilizar 2 steppers vamos ocpupar 8 pinos digitais do Arduino. A fonte de alimentação deve ligar aos pinos assinalados por **GND** e **VCC** na figura. Atenção à correcta conexão dos fios de alimentação.
 
-### Montagem do stepper
+## Montagem do stepper
 
 O circuíto da montagem para um stepper será semelhante ao diagrama seguinte:
 
 ![Diagrama da montagem para um stepper](assets/Motor-de-Passo-ULN2003-1024x459.jpg){heigth=7cm}
 
-### Código para o Arduino.
+## Código para o Arduino.
 
 A forma mais simples de controlar um Stepper é utilizando a biblioteca `Stepper.h` incluída na instalação do Arduino.
 
@@ -162,37 +171,57 @@ void loop() {
 
 O controlo do motor stepper com esta biblioteca implica que estamos a utilizar full-steps --- que tem mais binário e consomem mais energia. Em alternativa é possível utilizar o stepper com half-steps o que permite um controlo mais suave do motor mas com menos binário. Uma solução deste género pode ser encontrada no repositório deste projeto no <https://github.com/sixhat/Pintografo>
 
-### Controlo do steppers
+## Controlo da velocidade dos steppers
 
 O controlo dos dois steppers será efectuado por meio de um potenciometro de veio rotativo. Este dispositivo trata-se de uma resistência variável que por movimento do braço permite obter diferentes valores de resistência. Vamos utilizar esta propriedade para ler valores analógicos de voltagem nos pinos analógicos do Arduino (A0--A5).
 
+![Diagrama de um potenciometro](assets/potenciometer.png){height=7cm}
+
 Os valores lidos estarão no interavalo $[0, 1023]$ pelo que podemos utilizar o potenciometro para controlar a velocidade e direcção de rotação se considerarmos o ponto central $512$ como o ponto de inversão de direção da rotação do stepper.
 
-## Sugestões de melhoria do pintógrafo
+## Adiconar um botão on-off
+
+Por vezes é necessário parar o movimento dos steppers para colocar uma folha de papel ou para impedir alguma situação mais complicada. Assim será útil possuir um botão de ON-OFF que permita controlar o movimento de rotação dos steppers. Este botão ON-OFF deverá estar conectado a um pino digital de input e permitir que o Arduino execute os passos dos steppers somente se estiver na posição ON.
+
+Para evitar ter que adicionar resistências extra ao circuíto este botão ON-OFF deve estar configurado em modo pull-up interno indicando ao arduino no `setup` para configurar o respectivo pino de acordo. Por exemplo se o pino onde se vai ligar o botão ON-OFF for o pino Digital 7 (D7), deves fazer algo semelhante ao seguinte código:
+
+```c
+void setup(){
+  pinMode(7, INPUT_PULLUP);
+}
+void loop(){
+  if (LOW == digitalRead(7)){
+    // Run stepper code here
+  }
+}
+```
+
+\pagebreak
+# Sugestões de melhoria do pintógrafo
 
 Até esta secção construíste um pintógrafo simples, com 2 braços, dois discos de rotação, 2 steppers e 2 potenciometros. Neste momento a máquina está funcional, mas como podes ver, não é muito original, uma vez que fará desenhos simples e iguais às restantes máquinas. 
 
 Está na altura de melhorar a máquina consoante a tua criatividade e conceito. Aqui ficam algumas sugestões de melhoria do teu pintógrafo, mas podes sugerir outras alterações que serão analisadas pelos professores. 
 
-### Acrescentar uma mesa de papel rotativa
+## Acrescentar uma mesa de papel rotativa
 
 ![Pintógrafo Rotativo](assets/pinto-rotativo.png){width=10cm}
 
 Se adicionares um 3º motor podes construir um mesa rotativa no centro da área de desenho e dessa forma obter efeitos mais próximos de um espirógrafo.
 
-### Acrescentar novos discos na extremidade dos discos de rotação
+## Acrescentar novos discos na extremidade dos discos de rotação
 
 A forma mais completa do pintógrafo inclui um segundo conjunto de discos na extremidade dos primeiros. A utilização destes discos permite uma amplitude de movimentos maior resultando em desenhos mais variados que os do pintógrafo simples.
 
-### Acrescentar um microfone
+## Acrescentar um microfone
 
 Se adicionares um microfone podes criar um sistema de gravação de voz ou de música. A registo em papel será o resultado da captação da realidade ficando para sempre registada. Os teus utilizadores podem assim obter uma representação visual da sua voz, de uma música, ou de qualquer outra experiência sonora.
 
-### Acrescentar um sensor de temperatura e humidade
+## Acrescentar um sensor de temperatura e humidade
 
 Semelhante ao que acontece numa estação meteorológica, podes adicionar um sensor de temperatura e humidade e dessa forma registar em papel o estado do ambiente. Podes redesenhar e programar a tua máquina para fazer um desenho por dia.
 
-### Controlar se a caneta risca ou não o papel
+## Controlar se a caneta risca ou não o papel
 
 Podes adicionar um pequeno servo ao suporte da caneta de forma a que o desenho da linha não seja contínuo. O pequeno servo irá afastar ou colocar a caneta no papel. O controlo deste processo pode ser feito através de um botão na própria caixa ou programaticamente.
 
@@ -200,14 +229,15 @@ Podes adicionar um pequeno servo ao suporte da caneta de forma a que o desenho d
 
 As interfaces capacitivas permitem integrar um controlo digital que responda ao toque. Coloque uma interface capacitiva de forma a que a velocidade dos motores seja controlada pelo toque do utilizador.
 
-### Crie uma interface animada em p5js
+## Crie uma interface animada em p5js
 
 Construa uma animação no P5js de forma a que a máquina de desenho comunique bidireccionalmente com o computador. A animação enviará comandos do utilizador para a máquina de desenho e em simulatâneamente animará um sketch baseado no estado da máquina (posição dos potenciometros, motores, sensores, etc.)
 
-### Conecte duas máquinas de desenho
+## Conecte duas máquinas de desenho
 
 Conecte duas máquinas entre si utilizando o protocolo I2C ou Serial de forma a que os sensores de uma máquina afectem a outra.
 
+\pagebreak
 # Repositório online
 
 No repositório deste projeto, localizado em <https://github.com/sixhat/Pintografo> podes encontrar ficheiros modelo para as diversas fases do projecto. Estes ficheiros são bons pontos de partida para desenvolver os teus próprios modelos.
