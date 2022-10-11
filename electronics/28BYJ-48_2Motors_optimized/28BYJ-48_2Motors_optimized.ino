@@ -69,10 +69,13 @@ void writeMotor(int p1, int p2, int p3, int p4, int a, int b, int c, int d) {
 void setup() {
   activateMotor(&motor0, 0,  A0, 2, 3, 4, 5);
   activateMotor(&motor1, 1 , A1, 8, 9, 10, 11);
+  pinMode(7, INPUT_PULLUP);
 }
 
 void loop() {
-  runMotor(&motor0);
-  runMotor(&motor1);
+  if(digitalRead(7)==LOW){
+    runMotor(&motor0);
+    runMotor(&motor1);
+  }
   delayMicroseconds(1);
 }
