@@ -4,7 +4,7 @@ difference() {
 union(){
     hull() {
         cylinder(5, d = diam_parafuso + 5);
-        translate([dist_orificios*2, 0, 0])
+        translate([dist_orificios*2, diam_orificios, 0])
             cylinder(5, d = diam_parafuso + 5);
     }
 		translate([dist_orificios*2,0,0]) cylinder(20, d = 12);
