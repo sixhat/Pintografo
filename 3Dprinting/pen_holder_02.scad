@@ -1,5 +1,6 @@
 include <parametros.scad>
 
+module pen_holder(){
 difference() 
 {
 	union()
@@ -20,6 +21,6 @@ difference()
 	translate([dist_orificios/2,dist_orificios,-1]) cylinder(27, d = 10);
 	translate([-dist_orificios/2, dist_orificios*0.95,  -1]) cube([22, 20, 27]);
 }
-
-
+}
+//pen_holder();
 

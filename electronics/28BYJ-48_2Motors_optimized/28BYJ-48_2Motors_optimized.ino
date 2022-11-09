@@ -1,4 +1,7 @@
-byte pes[8] = {
+#define FAST 800
+#define SLOW 6400
+
+const byte pes[8] = {
   0b1000,
   0b1100,
   0b0100,
@@ -21,7 +24,7 @@ struct Motor {
 
 void activateMotor(struct Motor* motor, byte id, byte pin, byte a, byte b, byte c, byte d) {
   motor->active = 1;
-  motor->interval = 800;
+  motor->interval = FAST;
   motor->dir = 1;
   motor->step = 0;
 
@@ -43,7 +46,7 @@ void runMotor(struct Motor* motor) {
   if (motor->active && micros() - motor->previous >= motor->interval) {
 
     int pot = analogRead(motor->pin);
-    motor->interval =  word(map(abs(pot - 512), 0, 512, 3200, 800));
+    motor->interval =  word(map(abs(pot - 512), 0, 512, SLOW, FAST));
 
     if (pot > 511) {
       motor->dir = 1;
@@ -77,5 +80,5 @@ void loop() {
     runMotor(&motor0);
     runMotor(&motor1);
   }
-  delayMicroseconds(1);
+//  delayMicroseconds(1);
 }
