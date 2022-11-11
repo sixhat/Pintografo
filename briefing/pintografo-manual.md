@@ -20,15 +20,14 @@ geometry:
 - bottom=30mm
 - marginparwidth=35mm
 header-includes: |
-  \usepackage[T1]{fontenc}
-  \usepackage{times}
-  \usepackage[portuguese]{babel}
   \usepackage[utf8]{inputenc}
+  \usepackage{tgheros}
+  \usepackage[T1]{fontenc}
+  \usepackage[portuguese]{babel} 
   \newcommand{\nota}[1]{\marginpar{\footnotesize #1}} 
   \urlstyle{same}
   \usepackage{float}
   \floatplacement{figure}{H}
-  \usepackage[scale=0.95]{sourcecodepro}
   \usepackage{microtype}
   \usepackage[]{titlesec}
   \titleformat{\section}[frame]{\normalfont}{\filright \footnotesize \enspace SECTION \thesection\enspace}{8pt}{\Large\bfseries\filcenter}
@@ -122,11 +121,17 @@ O suporte de caneta deverá ser pensado para dar estabilidade à caneta. Um tubo
 \pagebreak
 # Electrónica
 
+A visão de conjunto da máquina é dada pela imagem seguinte:
+
+![Visão de conjunto das ligações para a fase 1](assets/circuito-maquina-fase-1.png){height=8cm}
+
+\nota{Caso não sigas estas conexões terás que fazer as alterações correspondentes no teu código} Repara na localização das entradas dos fios no arduino. O código para os controlar, disponível no repositório em <https://github.com/sixhat/Pintografo/blob/master/electronics/28BYJ-48_2Motors_optimized/28BYJ-48_2Motors_optimized.ino>, funciona assumindo estas conexões.
+
 A tua máquina de desenho vai funcionar com a utilização de dois steppers\nota{Os steppers, ou motores de passo, são utilizados em muitos dispositivos que requerem controlo fino da rotação do veio, como por exemplo nas impressoras\,3D}muito simples. Neste projeto vamos utilizar o steppper 28BYJ-48 conjuntamente com o driver ULN2003.
 
 ![28BYJ-48 stepper](assets/28BYJ-48_Stepper_Motor.png){height=5cm}
 
-Este stepper trata-se dum motor unipolar de 4 fases, que pode ser alimentado por 5V. Cada motor consome relativamente pouca corrente ($\approx 200mA$). 
+Este stepper trata-se dum motor unipolar de 4 fases, que pode ser alimentado por 5V. Cada motor consome relativamente pouca corrente ($\approx 200mA$).
 
 > Para mais informação sobre o funcionamento de steppers podes ler o link <http://solarbotics.net/library/pieces/parts_mech_steppers.html> (em Inglês).
 
@@ -146,30 +151,32 @@ O circuíto da montagem para um stepper será semelhante ao diagrama seguinte:
 
 ## Código para o Arduino.
 
-A forma mais simples de controlar um Stepper é utilizando a biblioteca `Stepper.h` incluída na instalação do Arduino.
+A forma mais simples de controlar um Stepper é utilizando a biblioteca [Unistep2](https://www.arduino.cc/reference/en/libraries/unistep2/) que deves instalar a partir do gestor de bibliotecs do Arduino.\nota{O Arduino possui uma biblioteca interna para steppers chamada `Stepper.h`. No entanto essa biblioteca não funciona bem com os steppers utilizados aqui neste projeto e não permite o controlo simultâneo dos dois.}
 
-Assim, um exemplo de código para o controlo do stepper pode ser visto a seguir, onde o stepper foi conectado aos pinos 8, 9, 10 e 11 e o sketch vai fazer o stepper dar uma revolução no sentido dos ponteiros do relógio e de seguida no sentido contrário ao dos ponteiros do relógio.
+Assim, um exemplo de código para o controlo do stepper pode ser visto a seguir, onde dois steppers foram conectados. O sketch vai fazer cada stepper movimentar-se numa direcção aleatória.
 
 ```c
-#include <Stepper.h>
+#include <Unistep2.h>
+Unistep2 motor0(2, 3, 4, 5, 4096, 1000); 
+Unistep2 motor1(8, 9, 10, 11, 4096, 1000);
 
-const int stepsPerRevolution = 64;  
-
-Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
-
-void setup() {
-  myStepper.setSpeed(10);
+void setup(){
 }
 
-void loop() {
-  myStepper.step(stepsPerRevolution);
-  delay(500);
-  myStepper.step(-stepsPerRevolution);
-  delay(500);
+void loop(){
+  motor0.run();
+  motor1.run();
+
+  if ( motor0.stepsToGo() == 0 ){ 
+    motor0.move(random(-4000,4000));
+  }
+  if ( motor1.stepsToGo() == 0 ){
+    motor1.move(random(-4000,4000));
+  }
 }
 ```
 
-O controlo do motor stepper com esta biblioteca implica que estamos a utilizar full-steps --- que tem mais binário e consomem mais energia. Em alternativa é possível utilizar o stepper com half-steps o que permite um controlo mais suave do motor mas com menos binário. Uma solução deste género pode ser encontrada no repositório deste projeto no <https://github.com/sixhat/Pintografo>
+O controlo do motor stepper com esta biblioteca permite ter dois motores a correr em simultâneo uma vez que não utiliza delays.  Uma solução deste género pode ser encontrada no repositório deste projeto no <https://github.com/sixhat/Pintografo> que apesar de não utilizar a biblioteca `Unistep2` foi programada com as mesmas ideias. 
 
 ## Controlo da velocidade dos steppers
 
@@ -195,6 +202,8 @@ void loop(){
   }
 }
 ```
+
+
 
 \pagebreak
 # Sugestões de melhoria do pintógrafo
