@@ -16,7 +16,7 @@ braco(comprimento = 10, d_orificio = 3, dist_orificio = 10, altura = 4)
         }
     }
 }
-//for (i = [0:20:160]) {
-//    translate([ 0, i, 0 ]) braco(40 + i, 3, 10, 4);}
+for (i = [0:20:160]) {
+    translate([ 0, i, 0 ]) braco(40 + i, 3, 10, 4);}
 
-//braco(180, 3.2, 10, 4);
+//braco(100, 3.2, 10, 4);
